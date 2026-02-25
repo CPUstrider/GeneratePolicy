@@ -4,7 +4,7 @@ import { packToHtml } from "@/lib/render/html";
 import { htmlToPdfBuffer } from "@/lib/render/pdf";
 
 export async function POST(req: Request) {
-  const supabase = supabaseServer();
+  const supabase = await supabaseServer();
   const { data: auth } = await supabase.auth.getUser();
   if (!auth.user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
