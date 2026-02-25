@@ -1,8 +1,10 @@
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
+import type { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
-export function supabaseServer() {
-  const cookieStore = cookies();
+export async function supabaseServer() {
+  const cookieStore: ReadonlyRequestCookies = await cookies();
+
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -17,7 +19,7 @@ export function supabaseServer() {
               cookieStore.set(name, value, options)
             );
           } catch {
-            // server components may not allow set; OK for read-only contexts
+            // ignore in server components
           }
         }
       }
