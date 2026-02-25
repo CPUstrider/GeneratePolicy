@@ -2,7 +2,7 @@ import Link from "next/link";
 import { supabaseServer } from "@/lib/supabase/server";
 
 export default async function DashboardPage() {
-  const supabase = supabaseServer();
+  const supabase = await supabaseServer();
   const { data: auth } = await supabase.auth.getUser();
 
   const { data: sub } = await supabase
