@@ -6,7 +6,7 @@ export async function htmlToPdfBuffer(html: string) {
     args: chromium.args,
     defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
-    headless: chromium.headless
+    headless: "shell"
   });
 
   try {
